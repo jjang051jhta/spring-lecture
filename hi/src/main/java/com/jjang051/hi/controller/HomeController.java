@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 
 //di dependency injection (의존성 주입) IoC (Inversion of Control)
 //@Controller 라는 annotation을 달면 scan 을 해서 스프링 컨테이너에 담아둔다.
@@ -49,5 +51,34 @@ public class HomeController {
         }
         model.addAttribute("dan", dan);
         return "gugudan02";
+    }
+
+    @GetMapping("/send")
+    public String send() {
+        return "send";
+    }
+    @GetMapping("/form-result")
+    //@ResponseBody
+    public String formResult(
+            @RequestParam(value = "userID", required = false)  String userID,
+            @RequestParam(value = "userPW", required = false)  String userPW,
+            @RequestParam(value = "favorite", required = false) List<String> favorite,
+            @RequestParam(value = "gender", required = false) String gender,
+            @RequestParam(value = "country", required = false) String country,
+            Model model
+
+            )
+    {
+        System.out.println("userID = "+userID);
+        System.out.println("userPW = "+userPW);
+        System.out.println("favorite = "+String.join(",",favorite));
+        System.out.println("gender = "+gender);
+        System.out.println("country = "+country);
+        model.addAttribute("userID",userID);
+        model.addAttribute("userPW",userPW);
+        model.addAttribute("gender",gender);
+        model.addAttribute("favorite",favorite);
+        model.addAttribute("country",country);
+        return "form-result";
     }
 }
