@@ -37,10 +37,16 @@ public class HomeController {
     @GetMapping("/gugudan02")
     public String gugudan02(
             @RequestParam(value = "dan", required = true, defaultValue = "2")
-            int dan,
+            String paramDan,
             Model model
             ) {
-
+        //정수가 아닐때 처리해보기....
+        int dan;
+        try {
+            dan = Integer.parseInt(paramDan);
+        } catch (NumberFormatException e) {
+            dan = 2;
+        }
         model.addAttribute("dan", dan);
         return "gugudan02";
     }

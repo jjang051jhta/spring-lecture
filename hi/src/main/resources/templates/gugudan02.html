@@ -18,5 +18,13 @@
     <li><span th:text="${dan}"></span> x 8 = <span th:text="${dan*8}"></span></li>
     <li><span th:text="${dan}"></span> x 9 = <span th:text="${dan*9}"></span></li>
 </ul>
+<hr>
+<h1><span th:text="${dan}">2</span>단을 출력합니다.</h1>
+<ul>
+    <li th:each="idx : ${#numbers.sequence(1,9)}">
+        <span th:text="${dan}"></span> x <span th:text="${idx}"></span> =
+        <span th:text="${dan*idx}"></span>
+    </li>
+</ul>
 </body>
 </html>
