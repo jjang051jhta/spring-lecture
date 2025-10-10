@@ -53,7 +53,7 @@ public class HomeController {
         return "gugudan02";
     }
 
-    @GetMapping("/send")
+    @GetMapping("/send222")
     public String send() {
         return "send";
     }
@@ -81,4 +81,37 @@ public class HomeController {
         model.addAttribute("country",country);
         return "form-result";
     }
+    @GetMapping("/consult")
+    public String consult() {
+        return "consult";
+    }
+    @GetMapping("/consult-result")
+    @ResponseBody
+    public String consultResult(
+            @RequestParam(value = "region", required = true, defaultValue = "gangnam") String  region,
+            @RequestParam(value = "userName", required = true, defaultValue = "") String userName,
+            @RequestParam(value = "tel01", required = true, defaultValue = "010") String tel01,
+            @RequestParam(value = "tel02", required = true, defaultValue = "") String tel02,
+            @RequestParam(value = "tel03", required = true, defaultValue = "") String tel03,
+            @RequestParam(value = "favorite", required = true, defaultValue = "") String favorite,
+            @RequestParam(value = "content", required = true, defaultValue = "") String content,
+            @RequestParam(value = "privacy", required = true, defaultValue = "") String privacy
+            )
+    {
+        System.out.println("region = "+region);
+        System.out.println("userName = "+userName);
+        //System.out.println("tel01 = "+tel01);
+        //System.out.println("tel02 = "+tel02);
+        //System.out.println("tel03 = "+tel03);
+        String tel = tel01+tel02+tel03;
+        System.out.println(tel);
+        System.out.println("favorite = "+favorite);
+        System.out.println("content = "+content);
+        System.out.println("privacy = "+privacy);
+        if(!privacy.equals("on")){
+            return "<script>alert('개인장보 동의하셔야 합니다.');history.back();</script>";
+        }
+        return "consult-result";
+    }
+
 }
