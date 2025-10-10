@@ -95,7 +95,7 @@ public class HomeController {
             @RequestParam(value = "tel03", required = true, defaultValue = "") String tel03,
             @RequestParam(value = "favorite", required = true, defaultValue = "") String favorite,
             @RequestParam(value = "content", required = true, defaultValue = "") String content,
-            @RequestParam(value = "privacy", required = true, defaultValue = "") String privacy
+            @RequestParam(value = "privacy", required = true, defaultValue = "off") String privacy
             )
     {
         System.out.println("region = "+region);
