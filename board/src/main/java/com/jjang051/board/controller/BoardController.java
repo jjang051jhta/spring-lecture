@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,5 +55,11 @@ public class BoardController {
         //list 내려 보내기
         model.addAttribute("boardDtoList",boardDtoList);
         return "board/list";
+    }
+    @GetMapping("/board/detail/{idx}")
+    public String detail(@PathVariable("idx") int idx, Model model){
+        BoardDto boardDto = boardDtoList.get(idx - 1);
+        model.addAttribute("boardDto",boardDto);
+        return "board/detail";
     }
 }
