@@ -3,6 +3,7 @@ package com.jjang051.board.controller;
 import com.jjang051.board.dto.BoardDto;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
@@ -49,7 +50,9 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String list(){
+    public String list(Model model){
+        //list 내려 보내기
+        model.addAttribute("boardDtoList",boardDtoList);
         return "board/list";
     }
 }
