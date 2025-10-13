@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -61,5 +62,13 @@ public class BoardController {
         BoardDto boardDto = boardDtoList.get(idx - 1);
         model.addAttribute("boardDto",boardDto);
         return "board/detail";
+    }
+    @GetMapping("/board/write")
+    public String write(){
+        return "board/write";
+    }
+    @PostMapping("/board/write")
+    public String writeProcess(){
+        return null;
     }
 }
