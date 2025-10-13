@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -68,7 +69,21 @@ public class BoardController {
         return "board/write";
     }
     @PostMapping("/board/write")
-    public String writeProcess(){
-        return null;
+    public String writeProcess(
+            @RequestParam(value = "title") String title,
+            @RequestParam(value = "content") String content,
+            @RequestParam(value = "writer") String writer
+            ){
+        BoardDto writeBoardDto = BoardDto.builder()
+                .regdate(LocalDateTime.now())
+                .title(title)
+                .content(content)
+                .writer(writer)
+                .hit(0)
+                .idx(boardDtoList.size()+1)
+                .build();
+        boardDtoList.add(writeBoardDto);
+        //강제로 페이지 이동....
+        return "redirect:/board/list";
     }
 }
