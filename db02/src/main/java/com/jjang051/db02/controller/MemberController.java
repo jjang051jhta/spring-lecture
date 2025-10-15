@@ -31,9 +31,22 @@ public class MemberController {
     }
 
     @PostMapping("/member/add")
-    @ResponseBody
+    //@ResponseBody
     public String memberAdd(@ModelAttribute("member") Member member){
-        System.out.println(member.getUserID()+"==="+member.getUserEmail()+"==="+member.getUserName());
-        return "post member add";
+        //System.out.println(member.getUserID()+"==="+member.getUserEmail()+"==="+member.getUserName());
+        int result = memberRepository.save(member);
+        return "redirect:../member/list";
+    }
+    @GetMapping("/member/{id}/edit")
+    public String memberEdit(@PathVariable("id") int id, Model model){
+        Member findedMember = memberRepository.findById(id);
+        model.addAttribute("findedMember",findedMember);
+        return "member/edit";
+    }
+    @PostMapping("/member/edit")
+    public String memberEdit(@ModelAttribute("member") Member member){
+        int result = memberRepository.update(member);
+        System.out.println(result);
+        return "redirect:../member/list";
     }
 }

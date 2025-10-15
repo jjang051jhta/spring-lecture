@@ -23,7 +23,7 @@ public class MemberRepository {
     }
      */
     public List<Member> findAll(){
-        String sql = "select * from member";
+        String sql = "select * from member order by id desc";
         //여러 건 조회
         List<Member> memberList =
                 jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Member.class));
@@ -35,5 +35,16 @@ public class MemberRepository {
         Member findedMember = jdbcTemplate.queryForObject
                 (sql,new BeanPropertyRowMapper<>(Member.class),id);
         return findedMember;
+    }
+    //int
+    public int save(Member member) {
+        //PrepareStatement
+        String sql = "insert into  member (id,userID,userName,userEmail) values (member_seq.nextval,?,?,?)";
+        return jdbcTemplate.update(sql,member.getUserID(), member.getUserName(), member.getUserEmail());
+    }
+    public int update(Member member) {
+        System.out.println(member);
+        String sql = "update member set userName=?,userEmail=? where id=?";
+        return jdbcTemplate.update(sql,member.getUserName(),member.getUserEmail(),member.getId());
     }
 }
