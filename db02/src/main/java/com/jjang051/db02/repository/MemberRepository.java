@@ -24,8 +24,16 @@ public class MemberRepository {
      */
     public List<Member> findAll(){
         String sql = "select * from member";
+        //여러 건 조회
         List<Member> memberList =
                 jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Member.class));
         return memberList;
+    }
+    public Member findById(int id){
+        String sql = "select * from member where id=?";
+        //단건 조회
+        Member findedMember = jdbcTemplate.queryForObject
+                (sql,new BeanPropertyRowMapper<>(Member.class),id);
+        return findedMember;
     }
 }

@@ -8,11 +8,16 @@
     <h1>members</h1>
     <ul>
         <li th:each="item:${memberList}">
-            <span th:text="${item.id}"></span>
-            <span th:text="${item.userID}"></span>
-            <span th:text="${item.userName}"></span>
-            <span th:text="${item.userEmail}"></span>
+            <a href="" th:href="@{../member/detail/{id}(id=${item.id})}">
+                <span th:text="${item.id}"></span>
+                <span th:text="${item.userID}"></span>
+                <span th:text="${item.userName}"></span>
+                <span th:text="${item.userEmail}"></span>
+            </a>
         </li>
     </ul>
+    <div>
+        <a href="../member/add">회원가입</a>
+    </div>
 </body>
 </html>
