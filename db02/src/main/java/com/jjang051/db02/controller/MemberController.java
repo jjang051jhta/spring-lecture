@@ -49,4 +49,15 @@ public class MemberController {
         System.out.println(result);
         return "redirect:../member/list";
     }
+    @GetMapping("/member/{id}/delete")
+    public String memberDelete(@PathVariable("id") int id, Model model){
+        Member findedMember = memberRepository.findById(id);
+        model.addAttribute("findedMember",findedMember);
+        return "member/delete";
+    }
+    @PostMapping("/member/delete")
+    public String memberDeleteProcess(@ModelAttribute Member member){
+        int result = memberRepository.delete(member);
+        return "redirect:/member/list";
+    }
 }

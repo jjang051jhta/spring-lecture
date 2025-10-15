@@ -47,4 +47,8 @@ public class MemberRepository {
         String sql = "update member set userName=?,userEmail=? where id=?";
         return jdbcTemplate.update(sql,member.getUserName(),member.getUserEmail(),member.getId());
     }
+    public int delete(Member member) {
+        String sql = "delete from member where userID=? and userPW = ?";
+        return jdbcTemplate.update(sql,member.getUserID(),member.getUserPW());
+    }
 }

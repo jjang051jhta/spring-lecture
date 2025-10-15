@@ -13,7 +13,8 @@
     </div>
     <div>
         <div><a href="../member/edit" th:href="@{|/member/${findedMember.id}/edit|}">수정</a></div>
-        <div><a href="../member/edit" th:href="@{/member/{id}(id=${findedMember.id})/edit}">수정</a></div>
+        <div><a href="../member/edit" th:href="@{/member/{id}/edit(id=${findedMember.id})}">수정</a></div>
+        <div><a href="" th:href="@{/member/{id}/delete(id=${findedMember.id})}">삭제</a></div>
     </div>
 </body>
 </html>
