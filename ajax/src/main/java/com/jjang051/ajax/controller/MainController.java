@@ -1,9 +1,11 @@
 package com.jjang051.ajax.controller;
 
 import com.jjang051.ajax.dto.JoinDto;
+import com.jjang051.ajax.dto.LoginDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -40,5 +42,31 @@ public class MainController {
         System.out.println(joinDto.getUserID()+","+joinDto.getUserPW()+","+joinDto.getAge());
         return "응답 response";
     }
+    @PostMapping("/ajax04")
+    @ResponseBody
+    public Map<String,Boolean> ajaxPost04(@RequestBody JoinDto joinDto){
+        System.out.println(joinDto.getUserID()+","+joinDto.getUserPW()+","+joinDto.getAge());
+        Map<String,Boolean> responseMap = new HashMap<>();
+        //db에 입력하고 결과를 받는다.
+        responseMap.put("isJoin",true);
+        return responseMap;
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @PostMapping("/login")
+    @ResponseBody
+    public Map<String,Boolean> loginProcess(@RequestBody LoginDto loginDto){
+        Map<String,Boolean> responseMap = new HashMap<>();
+        System.out.println(loginDto.getUserID()+","+loginDto.getUserPW());
+        if(loginDto.getUserID().equals("jjang051") && loginDto.getUserPW().equals("1234")){
+            responseMap.put("isLogin",true);
+        } else {
+            responseMap.put("isLogin", false);
+        }
+        return responseMap;
+    }
+
 
 }

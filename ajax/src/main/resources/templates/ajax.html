@@ -43,13 +43,13 @@ btnAjax.addEventListener("click",(e) => {
     console.log("btnAjax click");
     //url encoding 방식 form 방식으로 데이터 전달
     /*
-    fetch("ajax",{
+    fetch("ajax?userID=jjang051&userPW=1234",{
         method:"post",
         headers: {
             "Content-Type":
                 "application/x-www-form-urlencoded"
         },
-        body:params
+        //body:params
     })
      */
     const sendData = {
@@ -57,24 +57,18 @@ btnAjax.addEventListener("click",(e) => {
         userPW:"5678",
         age:30
     };
-    fetch("ajax03",{
+    fetch("ajax04",{
         method:"post",
         headers: {
-            "Content-Type":
-                "application/json"
+            "Content-Type":"application/json"
         },
         body:JSON.stringify(sendData)
-        /*
-        body:JSON.stringify({
-            userID:"유재석",
-            userPW:"5678"
-        })
-         */
     })
-        .then(res=>res.text())
+        .then((res)=>res.json())
         .then(data=>{
             console.log("서버에서 온 응답 = "+data);
         })
+    //pormise
 })
 
 
