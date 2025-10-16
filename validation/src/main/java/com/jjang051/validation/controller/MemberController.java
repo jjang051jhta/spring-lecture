@@ -52,8 +52,12 @@ public class MemberController {
             return "member/login";
         }
         MemberDto loginMember = memberRepository.findById(loginDto);
-        System.out.println(loginMember.toString());
-        return "member/list";
+        //System.out.println(loginMember.toString());
+        if(loginMember==null){
+            bindingResult.reject("loginFail","아이디 또는 패스워드가 맞지 않습니다.");
+            return "member/login";
+        }
+        return "redirect:member/list";
     }
 
 

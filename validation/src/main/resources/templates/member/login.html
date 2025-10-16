@@ -12,7 +12,13 @@
 </head>
 <body>
 <h1>add</h1>
+
 <form action="../member/login" method="post" th:object="${loginDto}">
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="error:${#fields.globalErrors()}" th:text="${error}" class="error">
+
+        </p>
+    </div>
     <div><input type="text" th:field="*{userID}"></div>
     <div th:if="${#fields.hasErrors('userID')}" class="error" th:errors="*{userID}">에러메세지를 직접 입력합니다.</div>
     <div><input type="password" th:field="*{userPW}"></div>
