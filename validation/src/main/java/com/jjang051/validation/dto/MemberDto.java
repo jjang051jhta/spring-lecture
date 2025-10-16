@@ -27,5 +27,6 @@ public class MemberDto {
     private String userName;
 
     @Email(message = "이메일 형식에 맞게 입력해주세요.")
+    @NotBlank(message = "이메일은 필수 입력사항입니다.")
     private String userEmail;
 }

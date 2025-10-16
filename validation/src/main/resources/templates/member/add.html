@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .error {
+            color:#f00;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
 <h1>add</h1>
 <form action="../member/add" method="post" th:object="${memberDto}">
     <div><input type="text" th:field="*{userID}"></div>
-    <div th:if="${msg}">userID는 필수 입력사항입니다.</div>
+    <div th:if="${#fields.hasErrors('userID')}" class="error" th:errors="*{userID}">에러메세지를 직접 입력합니다.</div>
     <div><input type="password" th:field="*{userPW}"></div>
-    <div th:if="${msg}">userPW는 필수 입력사항입니다. 4자이상 16이하로 작성해주세요</div>
+    <div th:if="${#fields.hasErrors('userPW')}" th:errors="*{userPW}"  class="error"></div>
     <div><input type="text" th:field="*{userName}"></div>
-    <div th:if="${msg}">userName은 필수 입력사항입니다.</div>
-    <div><input type="text" th:field="*{userEmail}"></div>
-    <div th:if="${msg}">이메일 형식에 맞게 입력해주세요</div>
+    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
+    <div><input type="text" th:field="*{userEmail}"  class="error"></div>
+    <div th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"  class="error"></div>
     <div>
         <button>확인</button>
     </div>
