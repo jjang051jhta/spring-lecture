@@ -7,4 +7,7 @@
         insert into member (id,userID,userPW,userName,userEmail) values
         (member_seq.nextval,#{userID},#{userPW},#{userName},#{userEmail})
     </insert>
+    <select id="idCheck" parameterType="MemberDto" resultType="int">
+        SELECT count(*) AS count FROM MEMBER WHERE userid = #{userID}
+    </select>
 </mapper>
