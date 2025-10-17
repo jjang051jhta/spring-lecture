@@ -5,9 +5,12 @@
 <mapper namespace="com.jjang051.board02.dao.BoardDao">
     <insert id="writeBoard" parameterType="BoardDto">
         insert into board(id,title,content,writer,regdate,hit,password) values
-        (board_seq.nextval,#{title},#{content},#{writer},#{regdate},1,#{password})
+        (board_seq.nextval,#{title},#{content},#{writer},sysdate,1,#{password})
     </insert>
     <select id="findAll" resultType="BoardDto">
         select * from board
+    </select>
+    <select id="findById" resultType="BoardDto" parameterType="int">
+        select * from board where id = #{id}
     </select>
 </mapper>

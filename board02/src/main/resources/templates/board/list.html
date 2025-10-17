@@ -7,11 +7,13 @@
 <body>
     <ul>
         <li th:each="item:${boardList}">
-            <span th:text="${item.id}"></span>
-            <span th:text="${item.title}"></span>
-            <span th:text="${item.writer}"></span>
-            <span th:text="${item.regdate}"></span>
-            <span th:text="${item.hit}"></span>
+            <a href="" th:href="@{../board/{id}/detail(id=${item.id})}">
+                <span th:text="${item.id}"></span>
+                <span th:text="${item.title}"></span>
+                <span th:text="${item.writer}"></span>
+                <span th:text="${item.regdate}"></span>
+                <span th:text="${item.hit}"></span>
+            </a>
         </li>
     </ul>
 </body>

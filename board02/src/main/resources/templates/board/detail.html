@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>detail</h1>
+    <div class="flex"><label>제목 </label><span th:text="${boardDto.title}"></span></div>
+    <div class="flex"><label>글쓴이 </label><span th:text="${boardDto.writer}"></span></div>
+    <div class="flex"><label>내용 </label><span th:text="${boardDto.content}"></span></div>
+    <div class="flex"><label>조회수 </label><span th:text="${boardDto.hit}"></span></div>
+    <div class="flex"><label>날짜 </label><span th:text="${boardDto.regdate}"></span></div>
+</body>
+</html>

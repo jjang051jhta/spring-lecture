@@ -9,4 +9,6 @@ import java.util.List;
 public interface BoardDao {
     int writeBoard(BoardDto boardDto);
     List<BoardDto> findAll();
+
+    BoardDto findById(int id);
 }
