@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head}"></head>
+<head th:replace="~{fragments/head('글보기')}"></head>
 <body>
-    <h1>detail</h1>
-    <div class="flex"><label>제목 </label><span th:text="${boardDto.title}"></span></div>
-    <div class="flex"><label>글쓴이 </label><span th:text="${boardDto.writer}"></span></div>
-    <div class="flex"><label>내용 </label><span th:text="${boardDto.content}"></span></div>
-    <div class="flex"><label>조회수 </label><span th:text="${boardDto.hit}"></span></div>
-    <div class="flex"><label>날짜 </label><span th:text="${boardDto.regdate}"></span></div>
-    <div><input type="password" name="password" id="password" placeholder="password"><button id="btn-delete">삭제</button></div>
-    <script th:inline="javascript">
-        const btnDelete = document.querySelector("#btn-delete");
-        const password = document.querySelector("#password");
-        //타임리프 변수 설정
-        const idx = /*[[${boardDto.id}]]*/ 0;
-        console.log(idx);
-        btnDelete.addEventListener("click",async ()=>{
+<header th:replace="~{fragments/header}"></header>
 
-            const sendPassword = password.value;
-            const res = await fetch("/board/delete",{
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                method:"post",
-                body:JSON.stringify({password: sendPassword,id:idx})
-            })
-            const data =  await res.json();
-            if(data.success) {
-                location.href="/board/list";
-            } else {
-                alert("비밀번호를 확인해주세요");
-            }
+<h1>detail</h1>
+<div class="flex"><label>제목 </label><span th:text="${boardDto.title}"></span></div>
+<div class="flex"><label>글쓴이 </label><span th:text="${boardDto.writer}"></span></div>
+<div class="flex"><label>내용 </label><span th:text="${boardDto.content}"></span></div>
+<div class="flex"><label>조회수 </label><span th:text="${boardDto.hit}"></span></div>
+<div class="flex"><label>날짜 </label><span th:text="${boardDto.regdate}"></span></div>
+<div><input type="password" name="password" id="password" placeholder="password">
+    <button id="btn-delete">삭제</button>
+</div>
+<script th:inline="javascript">
+    const btnDelete = document.querySelector("#btn-delete");
+    const password = document.querySelector("#password");
+    //타임리프 변수 설정
+    const idx = /*[[${boardDto.id}]]*/ 0;
+    console.log(idx);
+    btnDelete.addEventListener("click", async () => {
+
+        const sendPassword = password.value;
+        const res = await fetch("/board/delete", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "post",
+            body: JSON.stringify({password: sendPassword, id: idx})
         })
-    </script>
+        const data = await res.json();
+        if (data.success) {
+            location.href = "/board/list";
+        } else {
+            alert("비밀번호를 확인해주세요");
+        }
+    })
+</script>
 </body>
 </html>

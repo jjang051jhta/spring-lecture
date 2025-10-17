@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head::head('리스트')}"></head>
 <body>
+<header th:replace="~{fragments/header}"></header>
+
     <ul>
         <li th:each="item:${boardList}">
             <a href="" th:href="@{../board/{id}/detail(id=${item.id})}">

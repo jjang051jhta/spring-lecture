@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head::head('글쓰기')}"></head>
 <body>
+<header th:replace="~{fragments/header}"></header>
 <h1>글쓰기</h1>
 <form action="../board/write" method="post" th:object="${boardDto}">
     <div><label>제목 </label><input type="text" name="title" th:field="*{title}"></div>
