@@ -4,16 +4,35 @@
 <body>
 <header th:replace="~{fragments/header}"></header>
 
-    <ul>
-        <li th:each="item:${boardList}">
-            <a href="" th:href="@{../board/{id}/detail(id=${item.id})}">
-                <span th:text="${item.id}"></span>
-                <span th:text="${item.title}"></span>
-                <span th:text="${item.writer}"></span>
-                <span th:text="${item.regdate}"></span>
-                <span th:text="${item.hit}"></span>
-            </a>
-        </li>
-    </ul>
+<div class="overflow-x-auto max-w-6xl mx-auto mt-10">
+    <table class="table table-zebra w-full border border-base-300">
+        <!-- 테이블 헤더 -->
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>날짜</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+
+        <!-- 테이블 바디 -->
+        <tbody>
+        <tr th:each="item:${boardList}">
+            <td>
+                <a th:href="@{../board/{id}/detail(id=${item.id})}" class="link link-primary" th:text="${item.id}"></a>
+            </td>
+            <td>
+                <a th:href="@{../board/{id}/detail(id=${item.id})}" class="link link-hover" th:text="${item.title}"></a>
+            </td>
+            <td th:text="${item.writer}"></td>
+            <td th:text="${item.regdate}"></td>
+            <td th:text="${item.hit}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="~{fragments/footer::footer-sns}"></div>
 </body>
 </html>
