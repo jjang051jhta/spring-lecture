@@ -18,25 +18,22 @@
         //타임리프 변수 설정
         const idx = /*[[${boardDto.id}]]*/ 0;
         console.log(idx);
-        btnDelete.addEventListener("click",()=>{
+        btnDelete.addEventListener("click",async ()=>{
 
             const sendPassword = password.value;
-            fetch("/board/delete",{
+            const res = await fetch("/board/delete",{
                 headers: {
                     "Content-Type":"application/json"
                 },
                 method:"post",
                 body:JSON.stringify({password: sendPassword,id:idx})
             })
-                .then(res=>res.json())
-                .then(data=>{
-                    console.log(data);
-                    if(data.success) {
-                        location.href="/board/list";
-                    } else {
-                        alert("비밀번호를 확인해주세요");
-                    }
-                })
+            const data =  await res.json();
+            if(data.success) {
+                location.href="/board/list";
+            } else {
+                alert("비밀번호를 확인해주세요");
+            }
         })
     </script>
 </body>
