@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="~{fragments/head}"></head>
 <body>
     <h1>detail</h1>
     <div class="flex"><label>제목 </label><span th:text="${boardDto.title}"></span></div>
