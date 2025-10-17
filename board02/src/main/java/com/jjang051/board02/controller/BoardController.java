@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
@@ -51,9 +53,16 @@ public class BoardController {
     }
     @PostMapping("/delete")
     @ResponseBody
-    public String delete(@RequestBody BoardDto boardDto) {
+    public Map<String, Boolean> delete(@RequestBody BoardDto boardDto) {
         System.out.println("boardDto==="+boardDto);
-        //int result = boardDao.deleteBoard(boardDto);
-        return "deletet성공";
+        int result = boardDao.deleteBoard(boardDto);
+        Map<String, Boolean> map = new HashMap<>();
+
+        if(result > 0) {
+            map.put("success", true);
+        } else {
+            map.put("success", false);
+        }
+        return map;
     }
 }
