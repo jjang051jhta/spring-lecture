@@ -14,5 +14,6 @@
     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     <div><button>글쓰기</button></div>
 </form>
+<div th:replace="~{fragments/footer::footer-sns}"></div>
 </body>
 </html>
