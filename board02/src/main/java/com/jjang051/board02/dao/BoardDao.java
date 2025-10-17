@@ -11,4 +11,5 @@ public interface BoardDao {
     List<BoardDto> findAll();
 
     BoardDto findById(int id);
+    int deleteBoard(BoardDto boardDto);
 }

@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,5 +48,12 @@ public class BoardController {
         BoardDto boardDto = boardDao.findById(id);
         model.addAttribute("boardDto", boardDto);
         return "board/detail";
+    }
+    @PostMapping("/delete")
+    @ResponseBody
+    public String delete(@RequestBody BoardDto boardDto) {
+        System.out.println("boardDto==="+boardDto);
+        //int result = boardDao.deleteBoard(boardDto);
+        return "deletet성공";
     }
 }

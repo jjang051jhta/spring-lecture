@@ -11,5 +11,22 @@
     <div class="flex"><label>내용 </label><span th:text="${boardDto.content}"></span></div>
     <div class="flex"><label>조회수 </label><span th:text="${boardDto.hit}"></span></div>
     <div class="flex"><label>날짜 </label><span th:text="${boardDto.regdate}"></span></div>
+    <div><input type="password" name="password" placeholder="password"><button id="btn-delete">삭제</button></div>
+    <script>
+        const btnDelete = document.querySelector("#btn-delete");
+        btnDelete.addEventListener("click",()=>{
+            fetch("/board/delete",{
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                method:"post",
+                body:JSON.stringify({password: "1234",id:1})
+            })
+                .then(res=>res.text())
+                .then(data=>{
+                    console.log(data);
+                })
+        })
+    </script>
 </body>
 </html>

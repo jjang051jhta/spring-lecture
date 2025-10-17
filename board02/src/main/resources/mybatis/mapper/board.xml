@@ -13,4 +13,7 @@
     <select id="findById" resultType="BoardDto" parameterType="int">
         select * from board where id = #{id}
     </select>
+    <delete id="deleteBoard" parameterType="BoardDto">
+        delete from board where id = #{id} and password = #{password}
+    </delete>
 </mapper>
