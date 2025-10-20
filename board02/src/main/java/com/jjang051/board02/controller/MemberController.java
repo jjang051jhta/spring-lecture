@@ -30,10 +30,32 @@ public class MemberController {
     public String signup(@Valid @ModelAttribute MemberDto memberDto,
                          BindingResult bindingResult,
                          Model model) {
+        if(bindingResult.hasErrors()){
+            return "member/signup";
+        }
 
-
-
-        return "redirect:/member/login";
+        //result는 정수 반환  (insert,delete,update 등은 반환된 row를 리턴한다.)
+        int duplicateUserID  =  memberDao.existsUserId(memberDto.getUserID()); //userID가 있는지 따져보기
+        int duplicateUserEmail  =  memberDao.existsEmail(memberDto.getUserEmail()); //userID가 있는지 따져보기
+        System.out.println("duplicateUserEmail==="+duplicateUserEmail);
+        if(duplicateUserID > 0 ){
+            bindingResult.rejectValue("userID","duplicateID","사용할 수 없는 ID입니다.");
+            return "member/signup";
+        }
+        if(duplicateUserEmail > 0){
+            bindingResult.rejectValue("userEmail","duplicateEmail","사용할 수 없는 Email입니다.");
+            return "member/signup";
+        }
+        if(!memberDto.getUserPW().equals(memberDto.getUserPWConfirm())){
+            bindingResult.rejectValue("userPWConfirm","confirmPassword","패스워드가 일치하지 않습니다.");
+            return "member/signup";
+        }
+        int result = memberDao.signup(memberDto);
+        if(result>0) {
+            return "redirect:/member/login";
+        } else{
+            return "member/signup";
+        }
     }
 
     @PostMapping("/idCheck")
