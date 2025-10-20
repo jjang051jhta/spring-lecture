@@ -23,5 +23,11 @@
         FROM member
         WHERE userEmail = #{userEmail}
     </select>
+    <select id="login" parameterType="LoginDto" resultType="MemberDto">
+        SELECT *
+        FROM member
+        WHERE userID = #{userID} AND userPW = #{userPW}
+    </select>
+
 
 </mapper>

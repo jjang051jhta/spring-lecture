@@ -7,9 +7,15 @@
     <div class="navbar-center hidden lg:flex">
         <ul tabindex="-1"
             class="menu menu-horizontal px-1">
-            <li><a th:href="@{/member/signup}">회원가입</a></li>
-            <li><a href="" th:href="@{/member/login}">로그인</a></li>
-            <li><a href="" th:href="@{/board/list}">게시판</a></li>
+
+            <th:block th:if="${session.loggedMember==null}">
+                <li><a th:href="@{/member/signup}">회원가입</a></li>
+                <li><a href="" th:href="@{/member/login}">로그인</a></li>
+            </th:block>
+            <th:block th:unless="${session.loggedMember==null}">
+                <li><a href="" th:href="@{/member/info}" th:text="${session.loggedMember.userName}"></a></li>
+            </th:block>
+            <li><a th:href="@{/board/list}">게시판</a></li>
         </ul>
     </div>
     <div class="navbar-end">

@@ -1,7 +1,9 @@
 package com.jjang051.board02.controller;
 
 import com.jjang051.board02.dao.MemberDao;
+import com.jjang051.board02.dto.LoginDto;
 import com.jjang051.board02.dto.MemberDto;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
@@ -65,5 +67,27 @@ public class MemberController {
         Map<String, Boolean> map = new HashMap<>();
         map.put("isDuplicate", result > 0);
         return map;
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("loginDto", new LoginDto());
+        return "member/login";
+    }
+    @PostMapping("/login")
+    public String loginProcess(@Valid @ModelAttribute LoginDto loginDto,
+                               BindingResult bindingResult,
+                               HttpSession session,
+                               Model model) {
+
+        if(bindingResult.hasErrors()){
+            return "member/login";
+        }
+        MemberDto  loggedMemberDto = memberDao.login(loginDto);
+        //redirect에서는 유효하지 않다...
+        //pageContext, request, (session, application 번역 변수로 인식된다.)
+        session.setAttribute("loggedMember", loggedMemberDto);
+        //session은 로그아웃 하기 전까지 서버에 값을 가지고 있다.
+        return "redirect:/";
     }
 }
