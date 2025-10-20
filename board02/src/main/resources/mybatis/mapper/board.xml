@@ -19,7 +19,7 @@
     <delete id="deleteBoard" parameterType="BoardDto">
         delete from board where id = #{id} and password = #{password}
     </delete>
-    <select id="totalPage">
+    <select id="totalBoard">
         SELECT count(*) AS total FROM board
     </select>
 </mapper>

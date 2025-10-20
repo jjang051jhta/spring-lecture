@@ -13,5 +13,5 @@ public interface BoardDao {
 
     BoardDto findById(int id);
     int deleteBoard(BoardDto boardDto);
-    int totalPage();
+    int totalBoard();
 }

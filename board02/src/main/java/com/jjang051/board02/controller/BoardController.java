@@ -25,15 +25,25 @@ public class BoardController {
     @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(value = "page",defaultValue = "1") int page,
-
+                       @RequestParam(value = "size",defaultValue = "10") int size
     ) {
-        PageDto pageDto = new PageDto();
-        int currentPage = (page-1)*10;
-        pageDto.setPage(currentPage);
-        pageDto.setSize(10);
-        //10개씩 끊었을때 30개 출력하고 링크는 "board/list?page=3"
+        int totalBoard =  boardDao.totalBoard(); //전체 게시물 수  33 /10
+        int totalPages =  (int)Math.ceil((double)totalBoard/size);
+        int currentPage = (page-1)*size;
+        PageDto pageDto = PageDto.builder().size(size).page(currentPage).build();
+        System.out.println("pageDto==="+pageDto);
         List<BoardDto> boardList = boardDao.findAll(pageDto);
         model.addAttribute("boardList", boardList);
+        PageDto responsePageDto = PageDto.builder()
+                .page(page)
+                .size(size)
+                .total(totalBoard)
+                .totalPages(totalPages)
+                .hasPrev(page>1)
+                .hasNext(page<totalPages)
+                .build();
+
+        model.addAttribute("responsePageDto",responsePageDto);
         return "board/list";
     }
 
