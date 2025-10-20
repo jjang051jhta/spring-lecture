@@ -112,7 +112,7 @@ public class MemberController {
         MemberDto memberDto = (MemberDto) session.getAttribute("loggedMember");
         LoginDto loginDto = new  LoginDto();
         loginDto.setUserID(memberDto.getUserID());
-        loginDto.setUserPW(memberDto.getUserPW());
+        loginDto.setUserPW(userPW);
         int result = memberDao.deleteMember(loginDto);
         System.out.println("result===="+result);
 
