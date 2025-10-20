@@ -28,6 +28,7 @@
         FROM member
         WHERE userID = #{userID} AND userPW = #{userPW}
     </select>
-
-
+    <delete id="deleteMember" parameterType="LoginDto">
+        delete from member where userID =#{userID} and userPW = #{userPW}
+    </delete>
 </mapper>

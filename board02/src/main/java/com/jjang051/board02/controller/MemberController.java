@@ -100,4 +100,26 @@ public class MemberController {
         session.invalidate();
         return "redirect:/";
     }
+    @GetMapping("/delete")
+    public String delete() {
+        return "member/delete";
+    }
+    @PostMapping("/delete")
+    public String deleteProcess(@RequestParam("userPW") String userPW,
+                                HttpSession session,
+                                Model model) {
+        //session.getAttribute("loggedMember");
+        MemberDto memberDto = (MemberDto) session.getAttribute("loggedMember");
+        LoginDto loginDto = new  LoginDto();
+        loginDto.setUserID(memberDto.getUserID());
+        loginDto.setUserPW(memberDto.getUserPW());
+        int result = memberDao.deleteMember(loginDto);
+        System.out.println("result===="+result);
+
+        if(result>0) {
+            return "redirect:/";
+        }
+        model.addAttribute("error", "패스워드 확인해주세요");
+        return "member/delete";
+    }
 }

@@ -12,4 +12,5 @@ public interface MemberDao {
     int existsUserId(String userID);
     int existsEmail(String userEmail);
     MemberDto login(LoginDto loginDto);
+    int deleteMember(LoginDto loginDto);
 }
