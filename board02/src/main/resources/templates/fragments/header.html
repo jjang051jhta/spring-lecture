@@ -13,7 +13,8 @@
                 <li><a href="" th:href="@{/member/login}">로그인</a></li>
             </th:block>
             <th:block th:unless="${session.loggedMember==null}">
-                <li><a href="" th:href="@{/member/info}" th:text="${session.loggedMember.userName}"></a></li>
+                <li><a href="" th:href="@{/member/info}" th:text="${session.loggedMember.userName}">장성호</a></li>
+                <li><a href="" th:href="@{/member/logout}" >로그아웃</a></li>
             </th:block>
             <li><a th:href="@{/board/list}">게시판</a></li>
         </ul>

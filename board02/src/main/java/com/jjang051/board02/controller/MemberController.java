@@ -90,4 +90,14 @@ public class MemberController {
         //session은 로그아웃 하기 전까지 서버에 값을 가지고 있다.
         return "redirect:/";
     }
+    @GetMapping("/info")
+    public String info() {
+        //model.addAttribute("loginDto", new LoginDto());
+        return "member/info";
+    }
+    @GetMapping("/logout")
+    public String logout(Model model, HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }
