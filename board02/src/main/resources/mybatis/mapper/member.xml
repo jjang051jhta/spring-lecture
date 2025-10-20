@@ -10,4 +10,18 @@
     <select id="idCheck" parameterType="MemberDto" resultType="int">
         SELECT count(*) AS count FROM MEMBER WHERE userid = #{userID}
     </select>
+    <!-- USERID 중복 체크 -->
+    <select id="existsUserId" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE userID = #{userID}
+    </select>
+
+    <!-- EMAIL 중복 체크 -->
+    <select id="existsEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE userEmail = #{userEmail}
+    </select>
+
 </mapper>
