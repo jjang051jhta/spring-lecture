@@ -7,8 +7,11 @@
         insert into board(id,title,content,writer,regdate,hit,password) values
         (board_seq.nextval,#{title},#{content},#{writer},sysdate,1,#{password})
     </insert>
-    <select id="findAll" resultType="BoardDto">
-        select * from board
+    <select id="findAll" resultType="BoardDto" parameterType="PageDto">
+        SELECT id,writer,title,content,regdate,hit, password
+        FROM board
+        ORDER BY regdate DESC
+        OFFSET #{page} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
     <select id="findById" resultType="BoardDto" parameterType="int">
         select * from board where id = #{id}
@@ -16,4 +19,7 @@
     <delete id="deleteBoard" parameterType="BoardDto">
         delete from board where id = #{id} and password = #{password}
     </delete>
+    <select id="totalPage">
+        SELECT count(*) AS total FROM board
+    </select>
 </mapper>

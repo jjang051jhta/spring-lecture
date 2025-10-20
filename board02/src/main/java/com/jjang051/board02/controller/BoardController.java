@@ -2,6 +2,7 @@ package com.jjang051.board02.controller;
 
 import com.jjang051.board02.dao.BoardDao;
 import com.jjang051.board02.dto.BoardDto;
+import com.jjang051.board02.dto.PageDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,16 @@ public class BoardController {
     private final BoardDao boardDao;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<BoardDto> boardList = boardDao.findAll();
+    public String list(Model model,
+                       @RequestParam(value = "page",defaultValue = "1") int page,
+
+    ) {
+        PageDto pageDto = new PageDto();
+        int currentPage = (page-1)*10;
+        pageDto.setPage(currentPage);
+        pageDto.setSize(10);
+        //10개씩 끊었을때 30개 출력하고 링크는 "board/list?page=3"
+        List<BoardDto> boardList = boardDao.findAll(pageDto);
         model.addAttribute("boardList", boardList);
         return "board/list";
     }

@@ -13,8 +13,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns(
                         "/member/info",
                         "/member/delete",
-                        "/member/logout"
-                )
+                        "/member/logout",
+                        "/board/write",
+                        "/board/delete",
+                        "/board/*/detail",
+                        "/board/**/detail",
+                        "/board/edit"
+                        )
                 .excludePathPatterns(
                         "/member/login",
                         "/member/signup",

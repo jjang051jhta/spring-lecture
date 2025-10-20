@@ -25,7 +25,7 @@
             <span class="label-text font-bold">글쓴이</span>
         </label>
         <input type="text" th:field="*{writer}" placeholder="작성자 이름"
-               class="input input-bordered w-full"/>
+               class="input input-bordered w-full" th:value="${session.loggedMember.userName}"/>
         <div th:if="${#fields.hasErrors('writer')}"
              th:errors="*{writer}"
              class="text-error text-sm mt-1"></div>
