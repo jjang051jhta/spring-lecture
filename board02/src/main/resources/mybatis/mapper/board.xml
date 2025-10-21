@@ -24,6 +24,7 @@
     </select>
     <select id="search" parameterType="string" resultType="BoardDto">
         <!-- SELECT * FROM board WHERE title LIKE '%'||#{keyword}||'%'-->
+        <!-- 컬럼명은 #처리 안된다.-->
         SELECT * FROM board
         <where>
             <choose>
