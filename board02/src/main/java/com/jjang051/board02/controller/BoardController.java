@@ -26,11 +26,12 @@ public class BoardController {
 
     @GetMapping("/list")
     public String list(Model model,
-                       @RequestParam(value = "page",defaultValue = "1") int page,
-                       @RequestParam(value = "size",defaultValue = "10") int size
-    ) {
-
-        int totalBoard =  boardDao.totalBoard(); //전체 게시물 수  33 /10
+                       @ModelAttribute("pageDto")  PageDto pageDto
+                       )
+    {
+        int page =  pageDto.getPage();
+        int size =  pageDto.getSize();
+        int totalBoard =  boardDao.totalBoard(pageDto); //전체 게시물 수  33 /10
         int totalPages =  (int)Math.ceil((double)totalBoard/size);
         if(page < 1) {
             page = 1;
@@ -41,7 +42,6 @@ public class BoardController {
             return "redirect:/board/list?page="+page+"&size="+size;
         } // 마지막 보다 커지지 않게...
         int currentPage = (page-1)*size;
-        PageDto pageDto = PageDto.builder().size(size).page(currentPage).build();
         System.out.println("pageDto==="+pageDto);
         List<BoardDto> boardList = boardDao.findAll(pageDto);
         model.addAttribute("boardList", boardList);
@@ -50,6 +50,8 @@ public class BoardController {
         PageDto responsePageDto = PageDto.builder()
                 .page(page)
                 .size(size)
+                .keyword(pageDto.getKeyword())
+                .type(pageDto.getType())
                 .total(totalBoard)
                 .totalPages(totalPages)
                 .hasPrev(page>1)

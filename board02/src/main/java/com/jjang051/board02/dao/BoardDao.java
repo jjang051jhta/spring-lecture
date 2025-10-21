@@ -14,7 +14,7 @@ public interface BoardDao {
 
     BoardDto findById(int id);
     int deleteBoard(BoardDto boardDto);
-    int totalBoard();
+    int totalBoard(PageDto pageDto);
     List<BoardDto> search(@Param("keyword") String keyword,
                           @Param("type") String type);
 }
