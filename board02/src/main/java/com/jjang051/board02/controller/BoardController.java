@@ -2,7 +2,9 @@ package com.jjang051.board02.controller;
 
 import com.jjang051.board02.dao.BoardDao;
 import com.jjang051.board02.dto.BoardDto;
+import com.jjang051.board02.dto.MemberDto;
 import com.jjang051.board02.dto.PageDto;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,14 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String write(Model model) {
-        model.addAttribute("boardDto", new BoardDto());
+    public String write(Model model, HttpSession session) {
+        //로그인한 사용자면 이름을 넣어서 넘겨주고 아니면 빈 dto내려보내기
+        MemberDto loggedMember = (MemberDto)session.getAttribute("loggedMember");
+        BoardDto boardDto = new BoardDto();
+        if(loggedMember!=null){
+            boardDto.setWriter(loggedMember.getUserName());
+        }
+        model.addAttribute("boardDto", boardDto);
         return "board/write";
     }
     @PostMapping("/write")
