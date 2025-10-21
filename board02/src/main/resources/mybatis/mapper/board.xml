@@ -22,4 +22,21 @@
     <select id="totalBoard">
         SELECT count(*) AS total FROM board
     </select>
+    <select id="search" parameterType="string" resultType="BoardDto">
+        <!-- SELECT * FROM board WHERE title LIKE '%'||#{keyword}||'%'-->
+        SELECT * FROM board
+        <where>
+            <choose>
+                <when test="type=='title'">
+                    title LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+                </when>
+                <when test="type=='writer'">
+                    writer LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+                </when>
+                <when test="type=='content'">
+                    content LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+                </when>
+            </choose>
+        </where>
+    </select>
 </mapper>

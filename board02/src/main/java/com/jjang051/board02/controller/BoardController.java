@@ -103,4 +103,14 @@ public class BoardController {
         }
         return map;
     }
+    @GetMapping("/search")
+    public String search(
+            @RequestParam(value = "keyword",defaultValue = "") String keyword,
+            @RequestParam(value = "type",defaultValue = "title") String type,
+            Model model) {
+        System.out.println("keyword==="+keyword);
+        List<BoardDto> searchList = boardDao.search(keyword, type);
+        model.addAttribute("searchList", searchList);
+        return "board/search-list";
+    }
 }

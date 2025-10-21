@@ -3,6 +3,7 @@ package com.jjang051.board02.dao;
 import com.jjang051.board02.dto.BoardDto;
 import com.jjang051.board02.dto.PageDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface BoardDao {
     BoardDto findById(int id);
     int deleteBoard(BoardDto boardDto);
     int totalBoard();
+    List<BoardDto> search(@Param("keyword") String keyword,
+                          @Param("type") String type);
 }
