@@ -15,10 +15,9 @@ public class PageDto {
 
     //가로관련
     int total;     //전체 게시물 갯수
-    int totalPages; // 몇개의 페이지가 나올지  33
+    int totalPages; // 몇개의 페이지가 나올지
     boolean hasNext;
     boolean hasPrev;
-    //blockSize=5
 
     //1~5  //6~10 //11~15 //16~20 //21~25 //26~30 //31
     //if   page  1~5  1

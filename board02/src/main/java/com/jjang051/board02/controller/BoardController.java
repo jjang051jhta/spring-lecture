@@ -27,13 +27,18 @@ public class BoardController {
                        @RequestParam(value = "page",defaultValue = "1") int page,
                        @RequestParam(value = "size",defaultValue = "10") int size
     ) {
+
         int totalBoard =  boardDao.totalBoard(); //전체 게시물 수  33 /10
         int totalPages =  (int)Math.ceil((double)totalBoard/size);
+        if(page < 1) { page = 1; }  //0보다 작아지지 않게....
+        if(page > totalPages) {page = totalPages;} // 마지막 보다 커지지 않게...
         int currentPage = (page-1)*size;
         PageDto pageDto = PageDto.builder().size(size).page(currentPage).build();
         System.out.println("pageDto==="+pageDto);
         List<BoardDto> boardList = boardDao.findAll(pageDto);
         model.addAttribute("boardList", boardList);
+        System.out.println("pageDto.getStartPage(5) = "+pageDto.getStartPage(5));
+        System.out.println("pageDto.getEndPage(5) = "+pageDto.getEndPage(5));
         PageDto responsePageDto = PageDto.builder()
                 .page(page)
                 .size(size)
