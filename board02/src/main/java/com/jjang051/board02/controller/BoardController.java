@@ -33,6 +33,21 @@ public class BoardController {
         int size =  pageDto.getSize();
         int totalBoard =  boardDao.totalBoard(pageDto); //전체 게시물 수  33 /10
         int totalPages =  (int)Math.ceil((double)totalBoard/size);
+        if(totalBoard==0) {
+            model.addAttribute("boardList",List.of());
+            PageDto responsePageDto = PageDto.builder()
+                    .page(page)
+                    .size(size)
+                    .keyword(pageDto.getKeyword())
+                    .type(pageDto.getType())
+                    .total(totalBoard)
+                    .totalPages(1)
+                    .hasPrev(false)
+                    .hasNext(false)
+                    .build();
+            model.addAttribute("responsePageDto",responsePageDto);
+            return "/board/list";
+        }
         if(page < 1) {
             page = 1;
             return "redirect:/board/list?page="+page+"&size="+size;
@@ -44,9 +59,8 @@ public class BoardController {
         int currentPage = (page-1)*size;
         System.out.println("pageDto==="+pageDto);
         List<BoardDto> boardList = boardDao.findAll(pageDto);
+        System.out.println("페이지 = "+boardList.size());
         model.addAttribute("boardList", boardList);
-        System.out.println("pageDto.getStartPage(5) = "+pageDto.getStartPage(5));
-        System.out.println("pageDto.getEndPage(5) = "+pageDto.getEndPage(5));
         PageDto responsePageDto = PageDto.builder()
                 .page(page)
                 .size(size)
