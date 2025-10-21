@@ -53,10 +53,10 @@
     <!-- 이전/다음 글 -->
     <div class="mt-6 border-t border-base-300 pt-4 space-y-2">
         <div>
-            <a href="" class="link link-hover text-sm text-gray-600">이전 글 : 이전 글 제목</a>
+            <a href="" th:href="@{/board/{id}/detail(id=${prevBoardDto.id})}" class="link link-hover text-sm text-gray-600">이전 글 : <span th:text="${prevBoardDto.id}"></span><span th:text="${prevBoardDto.title}">이전 글 제목</span></a>
         </div>
         <div>
-            <a href="" class="link link-hover text-sm text-gray-600">다음 글 : 다음 글 제목</a>
+            <a href="" th:href="@{/board/{id}/detail(id=${nextBoardDto.id})}" class="link link-hover text-sm text-gray-600">다음 글 : <span th:text="${nextBoardDto.id}"></span><span th:text="${nextBoardDto.title}">다음 글 제목</span></a>
         </div>
     </div>
 </div>
