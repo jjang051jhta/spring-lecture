@@ -56,7 +56,6 @@ public class BoardController {
             page = totalPages;
             return "redirect:/board/list?page="+page+"&size="+size;
         } // 마지막 보다 커지지 않게...
-        int currentPage = (page-1)*size;
         System.out.println("pageDto==="+pageDto);
         List<BoardDto> boardList = boardDao.findAll(pageDto);
         System.out.println("페이지 = "+boardList.size());

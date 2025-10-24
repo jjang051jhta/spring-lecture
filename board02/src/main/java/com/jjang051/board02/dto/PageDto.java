@@ -32,4 +32,7 @@ public class PageDto {
         int endPage = getStartPage(blockSize)+blockSize - 1;
         return Math.min(endPage, totalPages);
     }
+    public int getOffset() {
+        return (page - 1) * size;
+    }
 }
